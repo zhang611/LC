@@ -1,6 +1,8 @@
 // leetcode_local.hpp
 #pragma once
-
+#include <vector>
+#include<queue>
+#include <algorithm>
 using namespace std;
 
 struct ListNode {

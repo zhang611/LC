@@ -221,7 +221,7 @@ UseTab: Never
 
 ColumnLimit: 100
 
-AllowShortIfStatementsOnASingleLine: false
+AllowShortIfStatementsOnASingleLine: true   # if 后面是否要换行
 AllowShortLoopsOnASingleLine: false
 AllowShortFunctionsOnASingleLine: Empty
 
