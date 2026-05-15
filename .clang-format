@@ -221,8 +221,8 @@ UseTab: Never
 
 ColumnLimit: 100
 
-AllowShortIfStatementsOnASingleLine: true   # if 后面是否要换行
-AllowShortLoopsOnASingleLine: false
+AllowShortIfStatementsOnASingleLine: true   # if 后面如果只有一行不换行
+AllowShortLoopsOnASingleLine: true   # while 后面如果只有一行不换行
 AllowShortFunctionsOnASingleLine: Empty
 
 BreakBeforeBraces: Custom
