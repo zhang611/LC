@@ -36,7 +36,7 @@
 # AllowShortFunctionsOnASingleLine: None
 
 # # 允许短的if语句保持在同一行
-# AllowShortIfStatementsOnASingleLine: true
+# AllowShortIfStatementsOnASingleLine: AllIfsAndElse
 
 # # 允许短的循环保持在同一行
 # AllowShortLoopsOnASingleLine: true
@@ -221,9 +221,11 @@ UseTab: Never
 
 ColumnLimit: 100
 
-AllowShortIfStatementsOnASingleLine: true   # if 后面如果只有一行不换行
+# AllowShortIfStatementsOnASingleLine: true   # if 后面如果只有一行不换行
 AllowShortLoopsOnASingleLine: true   # while 后面如果只有一行不换行
 AllowShortFunctionsOnASingleLine: Empty
+
+AllowShortIfStatementsOnASingleLine: AllIfsAndElse
 
 BreakBeforeBraces: Custom
 BraceWrapping:
