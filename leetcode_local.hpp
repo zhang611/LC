@@ -8,6 +8,7 @@
 #include <unordered_set>
 #include <stack>
 #include <iostream>
+#include <numeric>
 using namespace std;
 
 struct ListNode {

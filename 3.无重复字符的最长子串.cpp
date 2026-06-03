@@ -1,4 +1,4 @@
-#include <string>
+#include "leetcode_local.hpp"
 using namespace std;
 
 /*
@@ -9,19 +9,15 @@ using namespace std;
 
 // @lc code=start
 class Solution {
-   public:
+public:
     int lengthOfLongestSubstring(string s) {
         int res = 0;
         int hash[128] = {0};
-
-        int l = 0, r = 0;
-        while (r < s.size()) {
-            hash[s[r]]++;
-            while (hash[s[r]] > 1) {
-                hash[s[l++]]--;
-            }
-            res = max(res, r - l + 1);
-            r++;
+        int slow = 0;
+        for (int i = 0; i < s.size(); i++) {
+            hash[s[i]]++;
+            while (hash[s[i]] >= 2) hash[s[slow++]]--;
+            res = max(res, i - slow + 1);
         }
         return res;
     }
