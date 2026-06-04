@@ -12,9 +12,10 @@ public:
         vector<vector<string>> res;
         unordered_map<string, vector<string>> umap;
         for (int i = 0; i < strs.size(); i++) {
-            string cur = strs[i];
-            sort(cur.begin(), cur.end());
-            umap[cur].push_back(strs[i]);
+            string s = strs[i];
+            sort(s.begin(), s.end());
+            if (umap.find(s) != umap.end()) umap[s].push_back(strs[i]);
+            else umap[s] = {strs[i]};
         }
 
         for (auto it = umap.begin(); it != umap.end(); it++) {

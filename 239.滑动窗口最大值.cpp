@@ -13,7 +13,7 @@ public:
         deque<int> dq;
         for (int i = 0; i < nums.size(); i++) {
             if (dq.size() && i - dq.front() >= k) dq.pop_front();
-            while (dq.size() && nums[dq.back()] < nums[i]) dq.pop_back();
+            while (dq.size() && nums[dq.back()] <= nums[i]) dq.pop_back();
             dq.push_back(i);
             if (i >= k - 1) res.push_back(nums[dq.front()]);
         }

@@ -10,16 +10,16 @@ class Solution {
 public:
     vector<int> findAnagrams(string s, string p) {
         vector<int> res;
-        unordered_map<char, int> umap;
-        for (char c : p) umap[c]++;
-        int tot = umap.size();
+        unordered_map<char, int> cnt;
+        for (auto c : p) cnt[c]++;
+        int tot = cnt.size();
+
         for (int i = 0, j = 0, satify = 0; i < s.size(); i++) {
-            if (--umap[s[i]] == 0) satify++;
+            if (--cnt[s[i]] == 0) satify++;
             if (i - j >= p.size()) {
-                if (umap[s[j]] == 0) satify--;
-                umap[s[j++]]++;
+                if (cnt[s[j++]]++ == 0) satify--;
             }
-            if (tot == satify) res.push_back(j);
+            if (satify == tot) res.push_back(j);
         }
         return res;
     }

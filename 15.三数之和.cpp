@@ -20,9 +20,10 @@ public:
                 else if (nums[i] + nums[l] + nums[r] < 0) l++;
                 else {
                     res.push_back({nums[i], nums[l], nums[r]});
-                    while (l + 1 < r && nums[l + 1] == nums[l]) l++;
-                    while (l < r - 1 && nums[r - 1] == nums[r]) r--;
-                    l++, r--;
+                    while (l + 1 < r && nums[l] == nums[l + 1]) l++;
+                    while (l < r - 1 && nums[r] == nums[r - 1]) r--;
+                    l++;
+                    r--;
                 }
             }
         }

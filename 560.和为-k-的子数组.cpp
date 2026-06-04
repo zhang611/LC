@@ -9,16 +9,15 @@
 class Solution {
 public:
     int subarraySum(vector<int>& nums, int k) {
-        if (nums.size() == 1 && nums[0] != k) return 0;
+        int n = nums.size();
+        vector<int> s(n + 1);
+        for (int i = 1; i <= n; i++) s[i] = s[i - 1] + nums[i - 1];
         int res = 0;
-        int sum = 0;
-        for (int i = 0, j = 0; i < nums.size(); i++) {
-            sum += nums[i];
-            if (sum == k) res++;
-            while (sum > k) {
-                sum -= nums[j++];
-                if (sum == k) res++;
-            }
+        unordered_map<int, int> hash;
+        hash[0] = 1;
+        for (int i = 1; i <= n; i++) {
+            res += hash[s[i] - k];
+            hash[s[i]]++;
         }
         return res;
     }
