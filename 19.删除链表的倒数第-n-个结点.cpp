@@ -1,4 +1,4 @@
-
+#include "leetcode_local.hpp"
 /*
  * @lc app=leetcode.cn id=19 lang=cpp
  *
@@ -6,45 +6,30 @@
  */
 
 // @lc code=start
-
-// Definition for singly-linked list.
-struct ListNode
-{
-    int val;
-    ListNode *next;
-    ListNode() : val(0), next(nullptr) {}
-    ListNode(int x) : val(x), next(nullptr) {}
-    ListNode(int x, ListNode *next) : val(x), next(next) {}
-};
-
-class Solution
-{
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
 public:
-    ListNode *removeNthFromEnd(ListNode *head, int n)
-    {
-        ListNode *dummy = new ListNode(0);
+    ListNode* removeNthFromEnd(ListNode* head, int n) {
+        ListNode* dummy = new ListNode(-1);
         dummy->next = head;
+        ListNode *fast = dummy, *slow = dummy;
 
-        ListNode *fast = dummy;
-        ListNode *slow = dummy;
-        if (n <= 0)
-            return head;
-        while (n--)
-        {
-            fast = fast->next;
-        }
-
-        while (fast->next)
-        {
+        while (n--) fast = fast->next;
+        while (fast->next) {
             fast = fast->next;
             slow = slow->next;
         }
-
         slow->next = slow->next->next;
         return dummy->next;
     }
 };
 // @lc code=end
-
-
-

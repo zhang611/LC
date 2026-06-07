@@ -1,8 +1,8 @@
 #include "leetcode_local.hpp"
 /*
- * @lc app=leetcode.cn id=24 lang=cpp
+ * @lc app=leetcode.cn id=206 lang=cpp
  *
- * [24] 两两交换链表中的节点
+ * [206] 反转链表
  */
 
 // @lc code=start
@@ -18,23 +18,16 @@
  */
 class Solution {
 public:
-    ListNode* swapPairs(ListNode* head) {
-        ListNode* dummy = new ListNode(-1);
-        dummy->next = head;
-
-        ListNode* a = dummy;
-        ListNode* b = a->next;
-        while (b && b->next) {
+    ListNode* reverseList(ListNode* head) {
+        ListNode* a = nullptr;
+        ListNode* b = head;
+        while (b) {
             ListNode* c = b->next;
-            ListNode* d = c->next;
-            a->next = c;
-            c->next = b;
-            b->next = d;
-
+            b->next = a;
             a = b;
-            b = d;
+            b = c;
         }
-        return dummy->next;
+        return a;
     }
 };
 // @lc code=end

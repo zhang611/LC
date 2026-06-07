@@ -1,3 +1,4 @@
+#include "leetcode_local.hpp"
 /*
  * @lc app=leetcode.cn id=21 lang=cpp
  *
@@ -17,26 +18,23 @@
 
 class Solution {
 public:
-  ListNode *mergeTwoLists(ListNode *list1, ListNode *list2) {
-    ListNode *res = new ListNode(-1);
-    ListNode *cur = res;
+    ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
+        ListNode* dummy = new ListNode(-1);
+        ListNode* cur = dummy;
+        while (list1 && list2) {
+            if (list1->val <= list2->val) {
+                cur = cur->next = list1;
+                list1 = list1->next;
+            } else {
+                cur = cur->next = list2;
+                list2 = list2->next;
+            }
+        }
 
-    while (list1 && list2) {
-      if (list1->val <= list2->val) {
-        cur = cur->next = new ListNode(list1->val);
-        list1 = list1->next;
-      }
-      else {
-        cur = cur->next = new ListNode(list2->val);
-        list2 = list2->next;
-      }
+        if (list1) cur->next = list1;
+        if (list2) cur->next = list2;
+
+        return dummy->next;
     }
-    if (list1)
-      cur->next = list1;
-    if (list2)
-      cur->next = list2;
-
-    return res->next;
-  }
 };
 // @lc code=end
