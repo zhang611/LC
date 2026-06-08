@@ -1,9 +1,4 @@
 #include "leetcode_local.hpp"
-#include <vector>
-#include <algorithm>
-#include <queue>
-using namespace std;
-
 /*
  * @lc app=leetcode.cn id=23 lang=cpp
  *
@@ -22,28 +17,27 @@ using namespace std;
 // };
 
 class Solution {
-    struct MCP {
-        bool operator()(ListNode* a, ListNode* b) {
+public:
+    struct compare {
+        bool operator()(const ListNode* a, const ListNode* b) {
             return a->val > b->val;
         }
     };
 
-public:
     ListNode* mergeKLists(vector<ListNode*>& lists) {
-        priority_queue<ListNode*, vector<ListNode*>, MCP> heap;
-        for (int i = 0; i < lists.size(); i++) {
-            if (lists[i])
-                heap.push(lists[i]);
-        }
-
         ListNode* dummy = new ListNode(-1);
         ListNode* cur = dummy;
-        while (heap.size()) {
-            ListNode* temp = heap.top();
-            cur = cur->next = temp;
-            heap.pop();
-            if (temp->next)
-                heap.push(temp->next);
+        priority_queue<ListNode*, vector<ListNode*>, compare> pq;
+        for (int i = 0; i < lists.size(); i++) {
+            pq.push(lists[i]);
+            lists[i] = lists[i]->next;
+        }
+
+        while (pq.size()) {
+            ListNode* top = pq.top();
+            pq.pop();
+            cur = cur->next = top;
+            if (top->next) pq.push(top->next);
         }
         return dummy->next;
     }

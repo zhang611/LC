@@ -21,63 +21,33 @@ public:
     ListNode* reverseKGroup(ListNode* head, int k) {
         ListNode* dummy = new ListNode(-1);
         dummy->next = head;
-        ListNode* cur = dummy;
-
-        while (1) {
-            ListNode* st = cur->next;
-            ListNode* ed = cur;
+        ListNode* a = dummy;
+        ListNode* b = head;
+        while (b) {
+            ListNode* c = a;
             for (int i = 0; i < k; i++) {
-                if (ed) ed = ed->next;
+                if (!c->next) return dummy->next;
+                else c = c->next;
             }
-            if (ed == nullptr) break;
+            ListNode* d = c->next;
 
-            ListNode* a = cur->next;
-            ListNode* b = cur->next->next;
-            for (int i = 0; i < k - 1; i++) {
-                ListNode* c = b->next;
-                b->next = a;
-                a = b;
-                b = c;
+            // 内部翻转
+            ListNode* ta = nullptr;
+            ListNode* tb = b;
+            while (ta != c) {
+                ListNode* tc = tb->next;
+                tb->next = ta;
+                ta = tb;
+                tb = tc;
             }
-            cur->next->next = b;
-            cur->next = a;
-            cur = st;
+
+            a->next = c;
+            b->next = d;
+
+            a = b;
+            b = d;
         }
         return dummy->next;
     }
 };
 // @lc code=end
-
-// class Solution {
-// public:
-//     ListNode* reverseKGroup(ListNode* head, int k) {
-//         ListNode *dummy = new ListNode(-1);
-//         dummy->next = head;
-//         ListNode *cur = dummy;
-
-//         while(1) {
-//             int n = k;
-//             ListNode *end = cur;
-//             ListNode *st = cur->next;
-//             while(n--) {
-//                 if (end) end = end->next;
-//             }
-//             if (end == nullptr) break;
-
-//             ListNode *a = cur->next, *b = cur->next->next;
-//             int cnt = k - 1;
-//             while(cnt--) {
-//                 ListNode *t = b->next;
-//                 b->next = a;
-//                 a = b;
-//                 b = t;
-//             }
-//             cur->next->next = b;
-//             cur->next = a;
-//             cur = st;
-
-//         }
-//         return dummy->next;
-
-//     }
-// };
