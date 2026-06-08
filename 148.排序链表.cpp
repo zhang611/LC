@@ -19,9 +19,39 @@
 class Solution {
 public:
     ListNode* sortList(ListNode* head) {
-        
-        
-    }
-};
-// @lc code=end
+        if (!head || !head->next) return head;
 
+        ListNode* slow = head;
+        ListNode* fast = head->next;
+        while (fast && fast->next) {
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+
+        ListNode* mid = slow->next;
+        slow->next = nullptr;
+
+        ListNode* left = sortList(head);
+        ListNode* right = sortList(mid);
+
+        return merge(left, right);
+    }
+
+    ListNode* merge(ListNode* a, ListNode* b) {
+        ListNode* dummy = new ListNode(-1);
+        ListNode* cur = dummy;
+
+        while (a && b) {
+            if (a->val <= b->val) cur = cur->next = a, a = a->next;
+            else cur = cur->next = b, b = b->next;
+        }
+
+        if (a) cur->next = a;
+        if (b) cur->next = b;
+
+        return dummy->next;
+    }
+}
+
+;
+// @lc code=end
