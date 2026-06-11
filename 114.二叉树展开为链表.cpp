@@ -24,7 +24,6 @@ public:
         TreeNode* left = root->left;
         TreeNode* right = root->right;
         root->left = nullptr;
-        root->right = nullptr;
 
         if (left) root->right = dfs(left);
         TreeNode* lastNode = root;
