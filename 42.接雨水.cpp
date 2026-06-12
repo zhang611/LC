@@ -9,15 +9,15 @@
 class Solution {
 public:
     int trap(vector<int>& height) {
-        int res = 0;
         stack<int> st;
+        int res = 0;
         for (int i = 0; i < height.size(); i++) {
             while (st.size() && height[st.top()] < height[i]) {
                 int mid = st.top();
                 st.pop();
                 if (st.size()) {
                     int w = i - st.top() - 1;
-                    int h = min(height[i], height[st.top()]) - height[mid];
+                    int h = min(height[st.top()], height[i]) - height[mid];
                     res += w * h;
                 }
             }

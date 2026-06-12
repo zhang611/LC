@@ -9,17 +9,17 @@
 class Solution {
 public:
     vector<int> findAnagrams(string s, string p) {
+        unordered_map<char, int> umap;
         vector<int> res;
-        unordered_map<char, int> cnt;
-        for (auto c : p) cnt[c]++;
-        int tot = cnt.size();
 
-        for (int i = 0, j = 0, satify = 0; i < s.size(); i++) {
-            if (--cnt[s[i]] == 0) satify++;
-            if (i - j >= p.size()) {
-                if (cnt[s[j++]]++ == 0) satify--;
+        for (auto c : p) umap[c]++;
+        int size = umap.size();
+        for (int i = 0, j = 0, satify = 0; j < s.size(); j++) {
+            if (--umap[s[j]] == 0) satify++;
+            if (j - i >= p.size()) {
+                if (umap[s[i++]]++ == 0) satify--;
             }
-            if (satify == tot) res.push_back(j);
+            if (satify == size) res.push_back(i);
         }
         return res;
     }

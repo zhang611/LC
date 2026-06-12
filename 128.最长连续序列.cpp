@@ -10,17 +10,16 @@ class Solution {
 public:
     int longestConsecutive(vector<int>& nums) {
         if (nums.size() == 0) return 0;
-        int res = 1;
         unordered_set<int> uset;
         for (auto num : nums) uset.insert(num);
 
+        int res = 1;
         for (auto num : uset) {
             if (uset.find(num - 1) != uset.end()) continue;
-            int curLength = 1;
-            while (uset.find(num + curLength) != uset.end()) {
-                curLength++;
-                res = max(res, curLength);
-            }
+
+            int curLen = 1;
+            while (uset.find(num + curLen) != uset.end()) curLen++;
+            res = max(res, curLen);
         }
         return res;
     }
