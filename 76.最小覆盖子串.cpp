@@ -9,24 +9,27 @@
 class Solution {
 public:
     string minWindow(string s, string t) {
+        unordered_map<int, int> cnt;
         int start = -1;
         int len = INT_MAX;
-        unordered_map<char, int> cnt;
         for (auto c : t) cnt[c]++;
-        int tot = cnt.size();
-        for (int i = 0, j = 0, satify = 0; i < s.size(); i++) {
-            if (--cnt[s[i]] == 0) satify++;
+        int size = cnt.size();
 
-            while (satify == tot) {
-                if (i - j + 1 < len) {
-                    start = j;
-                    len = i - j + 1;
+        for (int i = 0, j = 0, satify = 0; j < s.size(); j++) {
+            if (--cnt[s[j]] == 0) satify++;
+
+            while (satify == size) {
+                if (j - i + 1 < len) {
+                    start = i;
+                    len = j - i + 1;
                 }
-                if (cnt[s[j++]]++ == 0) satify--;
+
+                if (cnt[s[i++]]++ == 0) satify--;
             }
         }
 
-        return start == -1 ? "" : s.substr(start, len);
+        if (start == -1) return "";
+        return s.substr(start, len);
     }
 };
 // @lc code=end

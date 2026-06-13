@@ -10,18 +10,15 @@ class Solution {
 public:
     vector<int> productExceptSelf(vector<int>& nums) {
         int n = nums.size();
-        vector<int> s1(n + 1);
-        vector<int> s2(n + 1);
-        s1[0] = 1, s2[n] = 1;
+        vector<int> p(n + 1, 1);
+        for (int i = 0; i < nums.size(); i++) p[i + 1] = p[i] * nums[i];
 
-        for (int i = 1; i <= n; i++) s1[i] = s1[i - 1] * nums[i - 1];
-        for (int i = n - 1; i >= 0; i--) s2[i] = s2[i + 1] * nums[i];
-
-        vector<int> res;
-        for (int i = 1; i <= n; i++) {
-            res.push_back(s1[i - 1] * s2[i]);
+        for (int i = n - 1, s = 1; i >= 0; i--) {
+            p[i] *= s;
+            s *= nums[i];
         }
-        return res;
+        p.pop_back();
+        return p;
     }
 };
 // @lc code=end

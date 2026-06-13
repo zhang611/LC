@@ -10,24 +10,25 @@ class Solution {
 public:
     vector<int> spiralOrder(vector<vector<int>>& matrix) {
         vector<int> res;
-        vector<vector<bool>> st(matrix.size(), vector<bool>(matrix[0].size(), false));
-        vector<vector<int>> dirs = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+        int n = matrix.size(), m = matrix[0].size();
+        vector<vector<bool>> st(n, vector<bool>(m, false));
 
-        int x = 0, y = 0;
-        int size = matrix.size() * matrix[0].size();
+        int size = n * m;
+        vector<vector<int>> dirs = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
         int dir = 0;
+        int cur_x = 0, cur_y = 0;
         while (size--) {
-            res.push_back(matrix[x][y]);
-            st[x][y] = true;
-            int i = x + dirs[dir][0];
-            int j = y + dirs[dir][1];
-            if (i >= matrix.size() || j >= matrix[0].size() || i < 0 || j < 0 || st[i][j] == true) {
+            res.push_back(matrix[cur_x][cur_y]);
+            st[cur_x][cur_y] = true;
+            int ne_x = cur_x + dirs[dir][0];
+            int ne_y = cur_y + dirs[dir][1];
+            if (ne_x < 0 || ne_x >= n || ne_y < 0 || ne_y >= m || st[ne_x][ne_y] == true) {
                 dir = (dir + 1) % 4;
-                i = x + dirs[dir][0];
-                j = y + dirs[dir][1];
+                ne_x = cur_x + dirs[dir][0];
+                ne_y = cur_y + dirs[dir][1];
             }
-            x = i;
-            y = j;
+            cur_x = ne_x;
+            cur_y = ne_y;
         }
         return res;
     }

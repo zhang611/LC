@@ -9,22 +9,22 @@
 class Solution {
 public:
     void rotate(vector<vector<int>>& matrix) {
-        int start = 0, end = matrix.size() - 1;
-        while (start < end) {
-            int len = end - start;
-            int t = end - start;
-            while (t--) {
-                int startValue = matrix[start][start];
-                for (int row = start + 1; row <= end; row++)
-                    matrix[row - 1][start] = matrix[row][start];
-                for (int col = start + 1; col <= end; col++) 
-                    matrix[end][col - 1] = matrix[end][col];
-                for (int row = end - 1; row >= start; row--)
-                    matrix[row + 1][end] = matrix[row][end];
-                for (int col = end - 1; col >= start; col--)
-                    matrix[start][col + 1] = matrix[start][col];
-                matrix[start][start + 1] = startValue;
+        int n = matrix.size();
+        n /= 2;
+
+        int start = 0;
+        int end = matrix.size() - 1;
+        while (n--) {
+            int rotation_num = end - start;
+            while (rotation_num--) {
+                int first_num = matrix[start][start];
+                for (int i = start + 1; i <= end; i++) matrix[i - 1][start] = matrix[i][start];
+                for (int i = start + 1; i <= end; i++) matrix[end][i - 1] = matrix[end][i];
+                for (int i = end - 1; i >= start; i--) matrix[i + 1][end] = matrix[i][end];
+                for (int i = end - 1; i >= start; i--) matrix[start][i + 1] = matrix[start][i];
+                matrix[start][start + 1] = first_num;
             }
+
             start++;
             end--;
         }

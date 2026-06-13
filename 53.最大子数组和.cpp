@@ -9,16 +9,13 @@
 class Solution {
 public:
     int maxSubArray(vector<int>& nums) {
-        int res = INT_MIN;
-        int sum = 0;
+        int sum = INT_MIN;
+        int cur = 0;
         for (int i = 0; i < nums.size(); i++) {
-            sum = nums[i] + max(0, sum);
-            res = max(res, sum);
+            cur = max(nums[i], cur + nums[i]);
+            sum = max(cur, sum);
         }
-        return res;
+        return sum;
     }
 };
 // @lc code=end
-
-
-// 其实这个代码是简化后的dp
