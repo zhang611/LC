@@ -19,34 +19,29 @@
 class Solution {
 public:
     bool isPalindrome(ListNode* head) {
-        int n = 0;
-        for (auto i = head; i != nullptr; i = i->next) n++;
-        if (n == 1) return true;
+        int len = 0;
+        for (auto i = head; i != nullptr; i = i->next) len++;
 
-        ListNode* headA = head;
-        ListNode* headB = head;
-        ListNode* lastA = head;
-        for (int i = 0; i < n / 2 - 1; i++) lastA = lastA->next;
-        if (n % 2 == 1) headB = lastA->next->next;
-        else headB = lastA->next;
-        lastA->next = nullptr;
+        if (len % 2) len = len / 2 + 1;
+        else len = len / 2;
 
-        // 反转a
+        ListNode* head2 = head;
+        while (len--) head2 = head2->next;
+
         ListNode* a = nullptr;
-        ListNode* b = headA;
+        ListNode* b = head2;
         while (b) {
             ListNode* c = b->next;
             b->next = a;
+
             a = b;
             b = c;
         }
 
-        headA = a;
-
-        while (headA && headB) {
-            if (headA->val != headB->val) return false;
-            headA = headA->next;
-            headB = headB->next;
+        while (a) {
+            if (a->val != head->val) return false;
+            a = a->next;
+            head = head->next;
         }
         return true;
     }

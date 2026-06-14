@@ -17,23 +17,12 @@
 class Solution {
 public:
     ListNode* getIntersectionNode(ListNode* headA, ListNode* headB) {
-        int lenA = 0;
-        for (auto i = headA; i != nullptr; i = i->next) lenA++;
-        int lenB = 0;
-        for (auto i = headB; i != nullptr; i = i->next) lenB++;
-
-        int gap = abs(lenA - lenB);
-        if (lenA > lenB)
-            while (gap--) headA = headA->next;
-        else
-            while (gap--) headB = headB->next;
-
-        while (headA != headB) {
-            headA = headA->next;
-            headB = headB->next;
+        ListNode *p = headA, *q = headB;
+        while (p != q) {
+            p = p ? p->next : headB;
+            q = q ? q->next : headA;
         }
-
-        return headA;
+        return p;
     }
 };
 // @lc code=end

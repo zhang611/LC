@@ -21,12 +21,15 @@ public:
     ListNode* reverseList(ListNode* head) {
         ListNode* a = nullptr;
         ListNode* b = head;
+
         while (b) {
             ListNode* c = b->next;
             b->next = a;
+
             a = b;
             b = c;
         }
+
         return a;
     }
 };
